@@ -17,15 +17,86 @@
 }
 
 body{
-    background:linear-gradient(135deg,#120018,#2c0036,#ff4f81);
-    min-height:100vh;
-    overflow-x:hidden;
+    background:linear-gradient(135deg,#120018,#2b0035,#ff4f81);
     color:white;
+    overflow-x:hidden;
+    min-height:100vh;
+}
+
+/* خلفية النجوم */
+
+.stars{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    z-index:-1;
+    overflow:hidden;
+}
+
+.stars span{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    animation:stars 10s linear infinite;
+}
+
+@keyframes stars{
+    0%{
+        transform:translateY(100vh);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-100px);
+        opacity:0;
+    }
+}
+
+/* القلوب */
+
+.hearts{
+    position:fixed;
+    width:100%;
+    height:100%;
+    top:0;
+    left:0;
+    pointer-events:none;
+}
+
+.hearts span{
+    position:absolute;
+    font-size:22px;
+    color:#ff9ec3;
+    animation:float 8s linear infinite;
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(100vh) rotate(0deg);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    100%{
+        transform:translateY(-120px) rotate(360deg);
+        opacity:0;
+    }
 }
 
 .container{
     width:90%;
-    max-width:1000px;
+    max-width:1100px;
     margin:auto;
     padding:40px 20px;
     text-align:center;
@@ -33,9 +104,9 @@ body{
 
 h1{
     font-size:75px;
+    margin-top:20px;
     color:#ffd8e8;
-    margin-top:30px;
-    text-shadow:0 0 25px #ff4f81;
+    text-shadow:0 0 20px #ff4f81;
     animation:glow 2s infinite alternate;
 }
 
@@ -43,13 +114,14 @@ h1{
     from{
         text-shadow:0 0 10px #ff4f81;
     }
+
     to{
         text-shadow:0 0 30px white;
     }
 }
 
 .subtitle{
-    margin-top:25px;
+    margin-top:20px;
     font-size:24px;
     line-height:2;
     color:#fff0f6;
@@ -67,11 +139,13 @@ h1{
     100%{transform:scale(1);}
 }
 
+/* القصة */
+
 .story{
     margin-top:50px;
     padding:35px;
-    border-radius:25px;
     background:rgba(255,255,255,0.08);
+    border-radius:25px;
     backdrop-filter:blur(12px);
     box-shadow:0 0 25px rgba(255,255,255,0.2);
     text-align:right;
@@ -81,13 +155,15 @@ h1{
     text-align:center;
     margin-bottom:20px;
     font-size:35px;
-    color:#ffd4e4;
+    color:#ffd6e7;
 }
 
 .story p{
     line-height:2.3;
     font-size:20px;
 }
+
+/* الاقتباس */
 
 .quote{
     margin-top:40px;
@@ -96,14 +172,16 @@ h1{
     text-shadow:0 0 15px #ff80ab;
 }
 
+/* الفيديو */
+
 .video-box{
-    margin-top:50px;
+    margin-top:60px;
 }
 
 .video-box h2{
     margin-bottom:20px;
     font-size:35px;
-    color:#ffd4e4;
+    color:#ffd6e7;
 }
 
 iframe{
@@ -115,6 +193,61 @@ iframe{
     box-shadow:0 0 30px rgba(255,255,255,0.3);
 }
 
+/* الكتاب */
+
+.book-section{
+    margin-top:70px;
+}
+
+.book-section h2{
+    font-size:40px;
+    margin-bottom:30px;
+    color:#ffd6e7;
+}
+
+.book{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:25px;
+}
+
+.page{
+    background:rgba(255,255,255,0.08);
+    border-radius:20px;
+    padding:25px;
+    backdrop-filter:blur(10px);
+    box-shadow:0 0 20px rgba(255,255,255,0.15);
+    transition:0.4s;
+    animation:fadeUp 1s ease;
+}
+
+.page:hover{
+    transform:translateY(-10px) scale(1.03);
+    box-shadow:0 0 25px rgba(255,255,255,0.3);
+}
+
+.page h3{
+    margin-bottom:15px;
+    color:#ffe4ef;
+}
+
+.page p{
+    line-height:2;
+    font-size:18px;
+}
+
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
 .footer{
     margin-top:60px;
     padding-bottom:30px;
@@ -122,92 +255,33 @@ iframe{
     font-size:18px;
 }
 
-.stars{
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    overflow:hidden;
-    z-index:-1;
-}
-
-.stars span{
-    position:absolute;
-    width:4px;
-    height:4px;
-    background:white;
-    border-radius:50%;
-    animation:move 10s linear infinite;
-}
-
-@keyframes move{
-    0%{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-    20%{
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-100px);
-        opacity:0;
-    }
-}
-
-.floating-hearts{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-}
-
-.floating-hearts span{
-    position:absolute;
-    color:#ff9cbc;
-    font-size:22px;
-    animation:float 8s linear infinite;
-}
-
-@keyframes float{
-    0%{
-        transform:translateY(100vh) rotate(0deg);
-        opacity:0;
-    }
-    20%{
-        opacity:1;
-    }
-    100%{
-        transform:translateY(-120px) rotate(360deg);
-        opacity:0;
-    }
-}
-
 </style>
 </head>
 
 <body>
 
+<!-- النجوم -->
+
 <div class="stars">
     <span style="left:10%;animation-duration:8s;"></span>
-    <span style="left:20%;animation-duration:11s;"></span>
+    <span style="left:20%;animation-duration:10s;"></span>
     <span style="left:30%;animation-duration:7s;"></span>
-    <span style="left:40%;animation-duration:14s;"></span>
+    <span style="left:40%;animation-duration:12s;"></span>
     <span style="left:50%;animation-duration:9s;"></span>
-    <span style="left:60%;animation-duration:12s;"></span>
-    <span style="left:70%;animation-duration:10s;"></span>
-    <span style="left:80%;animation-duration:15s;"></span>
+    <span style="left:60%;animation-duration:11s;"></span>
+    <span style="left:70%;animation-duration:14s;"></span>
+    <span style="left:80%;animation-duration:10s;"></span>
     <span style="left:90%;animation-duration:13s;"></span>
 </div>
 
-<div class="floating-hearts">
+<!-- القلوب -->
+
+<div class="hearts">
     <span style="left:15%;animation-duration:7s;">❤️</span>
-    <span style="left:35%;animation-duration:9s;">❤️</span>
-    <span style="left:55%;animation-duration:11s;">❤️</span>
-    <span style="left:75%;animation-duration:8s;">❤️</span>
-    <span style="left:90%;animation-duration:10s;">❤️</span>
+    <span style="left:35%;animation-duration:10s;">❤️</span>
+    <span style="left:55%;animation-duration:8s;">❤️</span>
+    <span style="left:75%;animation-duration:11s;">❤️</span>
+    <span style="left:90%;animation-duration:9s;">❤️</span>
 </div>
 
 <div class="container">
@@ -217,45 +291,108 @@ iframe{
     <div class="heart">💖</div>
 
     <p class="subtitle">
-        يمكن كل حاجة حواليكي دلوقتي باينة صعبة...  
-        بس صدقيني انتي لسه أجمل إحساس ممكن يعدي على قلب أي حد ❤️  
-        والناس الحلوة زيك، حتى زعلها بيكون مؤقت...  
-        لأنها تستحق الفرحة أكتر من أي حد.
+        يمكن الدنيا تكون تقيلة عليكي دلوقتي...  
+        بس صدقيني انتي لسه أجمل إحساس ممكن يعدي على قلب أي حد ❤️
     </p>
 
+    <!-- القصة -->
+
     <div class="story">
+
         <h2>📖 قصة حب خيالية</h2>
 
         <p>
-            في مدينة كلها مطر وليل طويل،  
-            كانت جوليا دايمًا بتحاول تبان قوية قدام الكل...  
-            لكن قلبها كان مليان حكايات محدش يعرفها.  
+            في ليلة كلها مطر وهدوء،  
+            كانت جوليا واقفة تبص للسما وتحاول تخبي زعلها.  
             <br><br>
-            وفي يوم، ظهر شخص كان مختلف عن كل الناس،  
-            كان بيحب يسمع صوتها حتى وهي ساكتة،  
-            وكان شايف إن ضحكتها أهم من الدنيا كلها.  
+            لحد ما ظهر شخص شاف فيها الحاجة الحلوة اللي محدش انتبهلها،  
+            كان بيحب ضحكتها أكتر من أي حاجة،  
+            وكان شايف إن زعلها أكبر خسارة في الدنيا.  
             <br><br>
-            كل مرة كانت الدنيا تكسرها،  
-            كان يقولها:  
-            "حتى لو الكل سابك... أنا هفضل جنبك."  
+            كل مرة كانت تقع فيها،  
+            كان يمسك إيدها ويقولها:  
+            "حتى لو الدنيا كلها بعدت... أنا مستحيل أسيبك."  
             <br><br>
-            ومع الوقت، فهمت جوليا إن الحب الحقيقي  
-            مش اللي يخلّي القلب يعيط...  
+            ومن وقتها فهمت جوليا إن الحب الحقيقي  
+            مش اللي يوجع القلب...  
             الحب الحقيقي هو اللي يداويه ❤️
         </p>
+
     </div>
+
+    <!-- اقتباس -->
 
     <div class="quote">
         "وفي وسط الزحمة... كان وجودك هو الهدوء الوحيد." ✨
     </div>
 
+    <!-- الفيديو -->
+
     <div class="video-box">
+
         <h2>🎬 فيديو مخصوص ليكي</h2>
 
-        <iframe 
+        <iframe
         src="https://www.youtube.com/embed/u7MxCuYPQT4"
         allowfullscreen>
         </iframe>
+
+    </div>
+
+    <!-- الكتاب -->
+
+    <div class="book-section">
+
+        <h2>📖 كتاب جوليا</h2>
+
+        <div class="book">
+
+            <div class="page"><h3>الصفحة 1</h3><p>انتي مش مجرد شخص عادي... انتي راحة نفس وحد يقدر يطمن بمجرد ما يشوفك ❤️</p></div>
+
+            <div class="page"><h3>الصفحة 2</h3><p>حتى زعلك له هيبة... لأن القلب الجميل لما يوجع بيبان مختلف.</p></div>
+
+            <div class="page"><h3>الصفحة 3</h3><p>في ناس حضورها عادي... وانتي حضورك يغيّر يوم كامل.</p></div>
+
+            <div class="page"><h3>الصفحة 4</h3><p>انتي تستحقي حب يطمن قلبك مش يتعبه.</p></div>
+
+            <div class="page"><h3>الصفحة 5</h3><p>كل مرة بتضحكي فيها... الدنيا بتبقى أخف شوية.</p></div>
+
+            <div class="page"><h3>الصفحة 6</h3><p>عيونك فيها حكاية طويلة من الجمال والهدوء.</p></div>
+
+            <div class="page"><h3>الصفحة 7</h3><p>في ناس بننساهم بسرعة... وانتي من النوع اللي مستحيل يتنسي.</p></div>
+
+            <div class="page"><h3>الصفحة 8</h3><p>لو الحنان كان شخص... كان هيبقى شبهك جدًا.</p></div>
+
+            <div class="page"><h3>الصفحة 9</h3><p>متخليش حد يخليكي تشكي في جمال روحك أبدًا.</p></div>
+
+            <div class="page"><h3>الصفحة 10</h3><p>أجمل حاجة فيكي إنك حقيقية وسط عالم كله تمثيل.</p></div>
+
+            <div class="page"><h3>الصفحة 11</h3><p>حتى سكوتك ليه معنى مختلف وحلو.</p></div>
+
+            <div class="page"><h3>الصفحة 12</h3><p>في حد شايفك أجمل حاجة حصلتله.</p></div>
+
+            <div class="page"><h3>الصفحة 13</h3><p>في قلبك سلام يكفي يصلّح ناس كتير تعبانة.</p></div>
+
+            <div class="page"><h3>الصفحة 14</h3><p>الروح الحلوة عمرها ما تحتاج تبهر حد.</p></div>
+
+            <div class="page"><h3>الصفحة 15</h3><p>حتى دموعك تستحق حد يمسحها بحب.</p></div>
+
+            <div class="page"><h3>الصفحة 16</h3><p>وجودك بيعمل فرق أكبر مما تتخيلي.</p></div>
+
+            <div class="page"><h3>الصفحة 17</h3><p>الليل بيبقى أهدى لما تكوني بخير.</p></div>
+
+            <div class="page"><h3>الصفحة 18</h3><p>انتي تستحقي شخص يخاف على قلبك من الزعل.</p></div>
+
+            <div class="page"><h3>الصفحة 19</h3><p>كل حاجة حلوة في الدنيا تفتكرني بيكي.</p></div>
+
+            <div class="page"><h3>الصفحة 20</h3><p>وجودك لوحده كان كفاية يخلّي الدنيا أهون.</p></div>
+
+            <div class="page"><h3>الصفحة 21</h3><p>انتي وردة نادرة وسط عالم مليان شوك.</p></div>
+
+            <div class="page"><h3>الصفحة 22</h3><p>ولو الدنيا كلها ضلمت... ضحكتك لوحدها تكفي تنورها ❤️</p></div>
+
+        </div>
+
     </div>
 
     <div class="footer">
@@ -265,4 +402,4 @@ iframe{
 </div>
 
 </body>
-</html>
+        </html>
