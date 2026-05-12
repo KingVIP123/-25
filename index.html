@@ -70,6 +70,11 @@
             margin: 10px 0;
             font-size: 28px;
         }
+        .password-card p {
+            color: #8b4d64;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
         .password-card input {
             width: 100%;
             padding: 12px;
@@ -435,9 +440,9 @@
     <div class="password-card">
         <i class="fas fa-heart"></i>
         <h2>✨ خاص لصفاء ✨</h2>
-        <p>اكتبي اسمك الجميل عشان تفرحي معايا</p>
+        <p>اكتبي البسورد وابتسمي 😍</p>
         <input type="text" id="passInput" placeholder="...." autocomplete="off">
-        <button id="unlockBtn"><i class="fas fa-unlock-alt"></i> افتحي الباب</button>
+        <button id="unlockBtn"><i class="fas fa-unlock-alt"></i> ادخلي ♥</button>
         <div id="loginError" class="error-msg"></div>
     </div>
 </div>
@@ -510,7 +515,6 @@
             <iframe src="https://www.youtube.com/embed/u7MxCuYPQT4?si=WObcA8dPXPISuRm1" title="أغنيتك المفضلة يا صفاء" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         </div>
         
-        <!-- تم تعديل النص حسب الطلب -->
         <div class="happy-message">
             <i class="fas fa-smile-wink"></i> ابتسمي مافي شي يستهل انتي الورده <i class="fas fa-smile-wink"></i>
         </div>
@@ -580,7 +584,7 @@
         document.getElementById('seconds').innerText = seconds < 10 ? '0'+seconds : seconds;
     }
     
-    // 30 صفحة (نفس المحتوى)
+    // 30 صفحة
     const pagesMessages = [
         "صفاء.. طيبة القلب اللي بتحسس كل اللي حواليها بالأمان.", "حنونة زي ما الأمهات بتحن، و كمان زيادة.", "رقتك تخلي الزهور تغار.", "صبورة و قوية، حتى لو الدنيا ضايقة.", "نقاء روحك باين من عينيك.", "ذكائك و حكمتك في أصعب المواقف.", "صفاء تعرف تسمع كويس و ده بيخلي الهموم تروح.", "ستيلك الجميل و أخلاقك العالية.", "عندك قدرة إنك تفرحي غيرك بضحكة.", "صفاء الحنونة، لما بتلمس إيدها على قلب حد.", "قلبك أبيض زي السكر، و كرمك و عطائك بدون حدود.", "حتى في صمتك بتحسي باللي حواليكي.", "شخصية قيادية بهدوء.", "جمال جوهرك هو سر جمالك الحقيقي.", "لما تكوني موجودة، كل حاجة بتبقى أحلى.", "طاقة إيجابية بتفوق الوصف.", "لطافتك اللي بتخليني أرضى بالدنيا كلها.", "حنينها للناس مش طبيعي.", "قوتك الناعمة تخلي أي شخص جنبك يحس بالأمان.", "حتى الفراشات بتعشق رقة تعاملك.", "جاذبية روحانية، قلبها مليان طمأنينة.", "إخلاصها نادر وفيّة.", "صباحك بيصحى في النفس شغف الحياة.", "مشاعرك الجياشة تطمئن القلوب.", "بتحسن تاخد بالها من تفاصيل صغيرة.", "حنية صفاء بتوصل لحد النجوم.", "رقيك في التعامل و تواضعك.", "صفاء صافية زي مية نبع.", "عطاؤها و سخائها بدون مقابل.", "صفاء.. أنتِ جميلة من جوا و برا دا دايمًا واضح."
     ];
@@ -608,16 +612,14 @@
     function nextBookPage() { goToBookPage(currentPageIndex+1); }
     function prevBookPage() { goToBookPage(currentPageIndex-1); }
     
-    // *********************************************
-    // لعبة الصندوق: 5 قلوب مع رسائل جديدة
-    // كلمة المرور: مجبش سرتي (نفس السابق)
+    // لعبة الصندوق: 5 قلوب
     const GAME_PASSWORD = "مجبش سرتي";
     const heartMessages = [
         "✨ صفاء، طيبتك بتصنع المعجزات. وجودك لوحده كفيل إنه يفرح أي زعلان. انتي نادرة ✨",
         "🌸 أنتِ نادرة مثل الياقوت، حنيتك بتلمس القلوب، وابتسامتك نور الدنيا. 🌸",
         "💖 صفاء، ديماً بتعطي أمل، وروحك الجميلة بتخلي الناس حواليكي مبسوطة. افتكري إنك مميزة و حنونة 💖",
-        "🌺 دايماً سندك ومعاكي .. في كل لحظة وفي كل مكان. أنتي مش لوحدك أبداً 🌺",      // القلب الرابع
-        "🌟 أجمل حد أنا عرفته وطيبه .. صفاء، أنتي فعلاً أجمل قلب و أطيب روح 🌟"       // القلب الخامس
+        "🌺 دايماً سندك ومعاكي .. في كل لحظة وفي كل مكان. أنتي مش لوحدك أبداً 🌺",
+        "🌟 أجمل حد أنا عرفته وطيبه .. صفاء، أنتي فعلاً أجمل قلب و أطيب روح 🌟"
     ];
     
     let gameUnlocked = false;
@@ -698,7 +700,6 @@
             startHearts();
             buildBook();
             goToBookPage(0);
-            // تجهيز اللعبة
             gameLockDiv.style.display = 'flex';
             gameContentDiv.style.display = 'none';
             gameUnlocked = false;
@@ -737,4 +738,4 @@
     window.onload = () => { passInput.focus(); };
 </script>
 </body>
-    </html>
+</html>
