@@ -1,405 +1,740 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Julia ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>صفاء حياتي | ابتسمي يا أجمل واحدة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700&display=swap" rel="stylesheet">
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(145deg, #fbc2c2 0%, #f7b0b0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-<style>
+        .floating-heart {
+            position: fixed;
+            font-size: 1.5rem;
+            pointer-events: none;
+            z-index: 999;
+            animation: floatLove 8s ease-out forwards;
+            color: #ff4d6d;
+            filter: drop-shadow(0 0 4px #ffb3c6);
+        }
+        @keyframes floatLove {
+            0% { transform: translateY(100vh) scale(0.3); opacity: 0.9; }
+            100% { transform: translateY(-20vh) scale(1.4); opacity: 0; }
+        }
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Cairo',sans-serif;
-}
+        .password-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: 0.4s;
+        }
+        .password-card {
+            background: #fff9fa;
+            border-radius: 65px;
+            padding: 2.2rem 2rem;
+            text-align: center;
+            width: 330px;
+            box-shadow: 0 20px 35px rgba(0,0,0,0.3), 0 0 0 5px #ffc0d0;
+        }
+        .password-card i {
+            font-size: 70px;
+            color: #e8436e;
+        }
+        .password-card h2 {
+            color: #a13555;
+            margin: 10px 0;
+            font-size: 28px;
+        }
+        .password-card input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 50px;
+            border: 2px solid #ffb7c6;
+            text-align: center;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            outline: none;
+        }
+        .password-card button {
+            background: #e8436e;
+            border: none;
+            width: 100%;
+            padding: 12px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .error-msg {
+            color: #b82b52;
+            margin-top: 12px;
+        }
 
-body{
-    background:linear-gradient(135deg,#120018,#2b0035,#ff4f81);
-    color:white;
-    overflow-x:hidden;
-    min-height:100vh;
-}
+        .website-container {
+            display: none;
+            width: 100%;
+            min-height: 100vh;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 20px;
+        }
+        .card-romance {
+            max-width: 1100px;
+            width: 100%;
+            background: rgba(255, 250, 245, 0.94);
+            border-radius: 70px;
+            padding: 30px 25px;
+            box-shadow: 0 35px 55px rgba(0,0,0,0.2);
+            backdrop-filter: blur(3px);
+            text-align: center;
+        }
+        .title-heart {
+            font-size: 2.5rem;
+            color: #cf3f64;
+            margin-bottom: 12px;
+        }
+        .sub {
+            font-size: 1.3rem;
+            color: #b94b6d;
+            margin-bottom: 35px;
+        }
+        .message-box {
+            background: #ffecf0;
+            border-radius: 58px;
+            padding: 28px 20px;
+            margin: 25px 0;
+            box-shadow: inset 0 0 0 2px #fff, 0 10px 20px rgba(0,0,0,0.05);
+        }
+        .message-box p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            color: #442c36;
+            font-weight: 500;
+        }
+        .countdown-area {
+            background: #ffffffdb;
+            border-radius: 80px;
+            padding: 20px;
+            margin: 25px 0;
+            box-shadow: 0 8px 22px rgba(0,0,0,0.08);
+        }
+        .countdown-title {
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #e8436e;
+        }
+        .timer {
+            display: flex;
+            justify-content: center;
+            gap: 22px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .time-block {
+            background: #ffeef3;
+            padding: 15px 18px;
+            border-radius: 45px;
+            min-width: 85px;
+            text-align: center;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+        }
+        .time-number {
+            font-size: 2.3rem;
+            font-weight: 800;
+            color: #b63f5f;
+        }
+        .time-label {
+            font-size: 0.9rem;
+            color: #b5637c;
+        }
 
-/* خلفية النجوم */
+        .book-section {
+            margin: 35px 0 25px;
+            background: #fff3f0;
+            border-radius: 60px;
+            padding: 20px 15px;
+            box-shadow: 0 12px 28px rgba(0,0,0,0.1);
+        }
+        .book-title {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #bd5f7a;
+            margin-bottom: 20px;
+        }
+        .flipbook-container {
+            position: relative;
+            min-height: 460px;
+            background: #fef7e8;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: inset 0 0 0 3px #fff, 0 12px 24px rgba(0,0,0,0.1);
+        }
+        .page-slider {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            min-height: 460px;
+        }
+        .page-card {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            background: #fffcf6;
+            padding: 35px 28px;
+            transition: transform 0.55s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            border-radius: 48px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            box-shadow: -3px 0 12px rgba(0, 0, 0, 0.02);
+        }
+        .page-content {
+            font-size: 1.28rem;
+            line-height: 1.8;
+            color: #3a2c31;
+            font-weight: 500;
+            background: #fffaf5;
+            padding: 20px;
+            border-radius: 50px;
+        }
+        .page-number {
+            margin-top: 35px;
+            font-size: 0.9rem;
+            color: #b8869b;
+        }
+        .book-nav {
+            display: flex;
+            justify-content: center;
+            gap: 18px;
+            margin-top: 25px;
+        }
+        .book-btn {
+            background: #e8a9bb;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            color: #321f2a;
+            cursor: pointer;
+            transition: 0.1s linear;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        .book-btn:active {
+            transform: scale(0.96);
+        }
 
-.stars{
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    z-index:-1;
-    overflow:hidden;
-}
+        .game-box {
+            background: linear-gradient(135deg, #fff0e5, #ffe1eb);
+            border-radius: 65px;
+            padding: 20px 20px 30px;
+            margin: 25px 0;
+            box-shadow: 0 20px 30px rgba(0,0,0,0.2);
+            border: 2px solid #ffc0d0;
+            transition: all 0.3s ease;
+            animation: gentlePulse 2s infinite;
+        }
+        @keyframes gentlePulse {
+            0% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.1);}
+            50% { transform: scale(1.01); box-shadow: 0 20px 35px rgba(231, 84, 128, 0.3);}
+            100% { transform: scale(1); box-shadow: 0 10px 20px rgba(0,0,0,0.1);}
+        }
+        .game-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 1.8rem;
+            color: #b65374;
+            font-weight: bold;
+            animation: swing 1.2s infinite alternate;
+        }
+        @keyframes swing {
+            from { transform: rotate(-2deg); }
+            to { transform: rotate(2deg); }
+        }
+        .lock-area {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 15px;
+            background: #fff0f5dd;
+            padding: 20px;
+            border-radius: 55px;
+            backdrop-filter: blur(8px);
+            transition: 0.3s;
+        }
+        .lock-area input {
+            padding: 12px;
+            border-radius: 40px;
+            border: 2px solid #f2a6bb;
+            text-align: center;
+            font-size: 1.1rem;
+            width: 80%;
+            transition: 0.2s;
+        }
+        .lock-area input:focus {
+            transform: scale(1.02);
+            border-color: #e8436e;
+            outline: none;
+        }
+        .lock-area button {
+            background: #c26781;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 50px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .lock-area button:hover {
+            background: #a34f6b;
+            transform: scale(0.97);
+        }
+        .game-content {
+            display: none;
+            text-align: center;
+            animation: fadeSlide 0.5s ease;
+        }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hearts-game {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+        .choice-heart {
+            background: #ffd9e4;
+            width: 120px;
+            padding: 20px 0;
+            border-radius: 80px;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.6, 1.1);
+            text-align: center;
+            box-shadow: 0 8px 12px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        .choice-heart i {
+            font-size: 3.5rem;
+            color: #e6396e;
+            transition: 0.2s;
+        }
+        .choice-heart p {
+            margin-top: 10px;
+            font-weight: bold;
+            color: #a53f5e;
+        }
+        .choice-heart:hover {
+            transform: translateY(-12px) scale(1.05);
+            background: #ffb7ca;
+            box-shadow: 0 18px 25px rgba(230,57,110,0.3);
+        }
+        .choice-heart:active {
+            transform: scale(0.96);
+        }
+        .message-reveal {
+            margin-top: 20px;
+            background: #fff3e0;
+            border-radius: 50px;
+            padding: 18px;
+            font-size: 1.2rem;
+            color: #632c42;
+            border-right: 6px solid #e8436e;
+            animation: glowMessage 0.8s ease;
+        }
+        @keyframes glowMessage {
+            0% { opacity: 0; transform: scale(0.9);}
+            100% { opacity: 1; transform: scale(1);}
+        }
+        .close-game-btn {
+            background: #f0a1b7;
+            margin-top: 12px;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .close-game-btn:hover {
+            background: #e6839d;
+            transform: translateY(-2px);
+        }
 
-.stars span{
-    position:absolute;
-    width:4px;
-    height:4px;
-    background:white;
-    border-radius:50%;
-    animation:stars 10s linear infinite;
-}
-
-@keyframes stars{
-    0%{
-        transform:translateY(100vh);
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(-100px);
-        opacity:0;
-    }
-}
-
-/* القلوب */
-
-.hearts{
-    position:fixed;
-    width:100%;
-    height:100%;
-    top:0;
-    left:0;
-    pointer-events:none;
-}
-
-.hearts span{
-    position:absolute;
-    font-size:22px;
-    color:#ff9ec3;
-    animation:float 8s linear infinite;
-}
-
-@keyframes float{
-    0%{
-        transform:translateY(100vh) rotate(0deg);
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
-    }
-
-    100%{
-        transform:translateY(-120px) rotate(360deg);
-        opacity:0;
-    }
-}
-
-.container{
-    width:90%;
-    max-width:1100px;
-    margin:auto;
-    padding:40px 20px;
-    text-align:center;
-}
-
-h1{
-    font-size:75px;
-    margin-top:20px;
-    color:#ffd8e8;
-    text-shadow:0 0 20px #ff4f81;
-    animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-    from{
-        text-shadow:0 0 10px #ff4f81;
-    }
-
-    to{
-        text-shadow:0 0 30px white;
-    }
-}
-
-.subtitle{
-    margin-top:20px;
-    font-size:24px;
-    line-height:2;
-    color:#fff0f6;
-}
-
-.heart{
-    font-size:55px;
-    margin:20px 0;
-    animation:beat 1s infinite;
-}
-
-@keyframes beat{
-    0%{transform:scale(1);}
-    50%{transform:scale(1.2);}
-    100%{transform:scale(1);}
-}
-
-/* القصة */
-
-.story{
-    margin-top:50px;
-    padding:35px;
-    background:rgba(255,255,255,0.08);
-    border-radius:25px;
-    backdrop-filter:blur(12px);
-    box-shadow:0 0 25px rgba(255,255,255,0.2);
-    text-align:right;
-}
-
-.story h2{
-    text-align:center;
-    margin-bottom:20px;
-    font-size:35px;
-    color:#ffd6e7;
-}
-
-.story p{
-    line-height:2.3;
-    font-size:20px;
-}
-
-/* الاقتباس */
-
-.quote{
-    margin-top:40px;
-    font-size:28px;
-    color:#ffe4ef;
-    text-shadow:0 0 15px #ff80ab;
-}
-
-/* الفيديو */
-
-.video-box{
-    margin-top:60px;
-}
-
-.video-box h2{
-    margin-bottom:20px;
-    font-size:35px;
-    color:#ffd6e7;
-}
-
-iframe{
-    width:100%;
-    max-width:850px;
-    height:480px;
-    border:none;
-    border-radius:25px;
-    box-shadow:0 0 30px rgba(255,255,255,0.3);
-}
-
-/* الكتاب */
-
-.book-section{
-    margin-top:70px;
-}
-
-.book-section h2{
-    font-size:40px;
-    margin-bottom:30px;
-    color:#ffd6e7;
-}
-
-.book{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:25px;
-}
-
-.page{
-    background:rgba(255,255,255,0.08);
-    border-radius:20px;
-    padding:25px;
-    backdrop-filter:blur(10px);
-    box-shadow:0 0 20px rgba(255,255,255,0.15);
-    transition:0.4s;
-    animation:fadeUp 1s ease;
-}
-
-.page:hover{
-    transform:translateY(-10px) scale(1.03);
-    box-shadow:0 0 25px rgba(255,255,255,0.3);
-}
-
-.page h3{
-    margin-bottom:15px;
-    color:#ffe4ef;
-}
-
-.page p{
-    line-height:2;
-    font-size:18px;
-}
-
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(30px);
-    }
-
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-.footer{
-    margin-top:60px;
-    padding-bottom:30px;
-    color:#ffd6e7;
-    font-size:18px;
-}
-
-</style>
+        .video-container {
+            margin: 30px 0 20px;
+            border-radius: 45px;
+            overflow: hidden;
+            box-shadow: 0 12px 25px rgba(0,0,0,0.2);
+        }
+        iframe {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border: none;
+        }
+        .happy-message {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #b34264;
+            background: #fff1f5;
+            display: inline-block;
+            padding: 12px 28px;
+            border-radius: 60px;
+        }
+        footer {
+            margin-top: 30px;
+            color: #b75a79;
+            font-size: 1rem;
+        }
+        @media (max-width: 650px) {
+            .choice-heart { width: 85px; }
+            .choice-heart i { font-size: 2.2rem; }
+            .page-content { font-size: 1rem; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- النجوم -->
-
-<div class="stars">
-    <span style="left:10%;animation-duration:8s;"></span>
-    <span style="left:20%;animation-duration:10s;"></span>
-    <span style="left:30%;animation-duration:7s;"></span>
-    <span style="left:40%;animation-duration:12s;"></span>
-    <span style="left:50%;animation-duration:9s;"></span>
-    <span style="left:60%;animation-duration:11s;"></span>
-    <span style="left:70%;animation-duration:14s;"></span>
-    <span style="left:80%;animation-duration:10s;"></span>
-    <span style="left:90%;animation-duration:13s;"></span>
+<div id="passwordOverlay" class="password-overlay">
+    <div class="password-card">
+        <i class="fas fa-heart"></i>
+        <h2>✨ خاص لصفاء ✨</h2>
+        <p>اكتبي اسمك الجميل عشان تفرحي معايا</p>
+        <input type="text" id="passInput" placeholder="...." autocomplete="off">
+        <button id="unlockBtn"><i class="fas fa-unlock-alt"></i> افتحي الباب</button>
+        <div id="loginError" class="error-msg"></div>
+    </div>
 </div>
 
-<!-- القلوب -->
-
-<div class="hearts">
-    <span style="left:15%;animation-duration:7s;">❤️</span>
-    <span style="left:35%;animation-duration:10s;">❤️</span>
-    <span style="left:55%;animation-duration:8s;">❤️</span>
-    <span style="left:75%;animation-duration:11s;">❤️</span>
-    <span style="left:90%;animation-duration:9s;">❤️</span>
-</div>
-
-<div class="container">
-
-    <h1>Julia ❤️</h1>
-
-    <div class="heart">💖</div>
-
-    <p class="subtitle">
-        يمكن الدنيا تكون تقيلة عليكي دلوقتي...  
-        بس صدقيني انتي لسه أجمل إحساس ممكن يعدي على قلب أي حد ❤️
-    </p>
-
-    <!-- القصة -->
-
-    <div class="story">
-
-        <h2>📖 قصة حب خيالية</h2>
-
-        <p>
-            في ليلة كلها مطر وهدوء،  
-            كانت جوليا واقفة تبص للسما وتحاول تخبي زعلها.  
-            <br><br>
-            لحد ما ظهر شخص شاف فيها الحاجة الحلوة اللي محدش انتبهلها،  
-            كان بيحب ضحكتها أكتر من أي حاجة،  
-            وكان شايف إن زعلها أكبر خسارة في الدنيا.  
-            <br><br>
-            كل مرة كانت تقع فيها،  
-            كان يمسك إيدها ويقولها:  
-            "حتى لو الدنيا كلها بعدت... أنا مستحيل أسيبك."  
-            <br><br>
-            ومن وقتها فهمت جوليا إن الحب الحقيقي  
-            مش اللي يوجع القلب...  
-            الحب الحقيقي هو اللي يداويه ❤️
-        </p>
-
-    </div>
-
-    <!-- اقتباس -->
-
-    <div class="quote">
-        "وفي وسط الزحمة... كان وجودك هو الهدوء الوحيد." ✨
-    </div>
-
-    <!-- الفيديو -->
-
-    <div class="video-box">
-
-        <h2>🎬 فيديو مخصوص ليكي</h2>
-
-        <iframe
-        src="https://www.youtube.com/embed/u7MxCuYPQT4"
-        allowfullscreen>
-        </iframe>
-
-    </div>
-
-    <!-- الكتاب -->
-
-    <div class="book-section">
-
-        <h2>📖 كتاب جوليا</h2>
-
-        <div class="book">
-
-            <div class="page"><h3>الصفحة 1</h3><p>انتي مش مجرد شخص عادي... انتي راحة نفس وحد يقدر يطمن بمجرد ما يشوفك ❤️</p></div>
-
-            <div class="page"><h3>الصفحة 2</h3><p>حتى زعلك له هيبة... لأن القلب الجميل لما يوجع بيبان مختلف.</p></div>
-
-            <div class="page"><h3>الصفحة 3</h3><p>في ناس حضورها عادي... وانتي حضورك يغيّر يوم كامل.</p></div>
-
-            <div class="page"><h3>الصفحة 4</h3><p>انتي تستحقي حب يطمن قلبك مش يتعبه.</p></div>
-
-            <div class="page"><h3>الصفحة 5</h3><p>كل مرة بتضحكي فيها... الدنيا بتبقى أخف شوية.</p></div>
-
-            <div class="page"><h3>الصفحة 6</h3><p>عيونك فيها حكاية طويلة من الجمال والهدوء.</p></div>
-
-            <div class="page"><h3>الصفحة 7</h3><p>في ناس بننساهم بسرعة... وانتي من النوع اللي مستحيل يتنسي.</p></div>
-
-            <div class="page"><h3>الصفحة 8</h3><p>لو الحنان كان شخص... كان هيبقى شبهك جدًا.</p></div>
-
-            <div class="page"><h3>الصفحة 9</h3><p>متخليش حد يخليكي تشكي في جمال روحك أبدًا.</p></div>
-
-            <div class="page"><h3>الصفحة 10</h3><p>أجمل حاجة فيكي إنك حقيقية وسط عالم كله تمثيل.</p></div>
-
-            <div class="page"><h3>الصفحة 11</h3><p>حتى سكوتك ليه معنى مختلف وحلو.</p></div>
-
-            <div class="page"><h3>الصفحة 12</h3><p>في حد شايفك أجمل حاجة حصلتله.</p></div>
-
-            <div class="page"><h3>الصفحة 13</h3><p>في قلبك سلام يكفي يصلّح ناس كتير تعبانة.</p></div>
-
-            <div class="page"><h3>الصفحة 14</h3><p>الروح الحلوة عمرها ما تحتاج تبهر حد.</p></div>
-
-            <div class="page"><h3>الصفحة 15</h3><p>حتى دموعك تستحق حد يمسحها بحب.</p></div>
-
-            <div class="page"><h3>الصفحة 16</h3><p>وجودك بيعمل فرق أكبر مما تتخيلي.</p></div>
-
-            <div class="page"><h3>الصفحة 17</h3><p>الليل بيبقى أهدى لما تكوني بخير.</p></div>
-
-            <div class="page"><h3>الصفحة 18</h3><p>انتي تستحقي شخص يخاف على قلبك من الزعل.</p></div>
-
-            <div class="page"><h3>الصفحة 19</h3><p>كل حاجة حلوة في الدنيا تفتكرني بيكي.</p></div>
-
-            <div class="page"><h3>الصفحة 20</h3><p>وجودك لوحده كان كفاية يخلّي الدنيا أهون.</p></div>
-
-            <div class="page"><h3>الصفحة 21</h3><p>انتي وردة نادرة وسط عالم مليان شوك.</p></div>
-
-            <div class="page"><h3>الصفحة 22</h3><p>ولو الدنيا كلها ضلمت... ضحكتك لوحدها تكفي تنورها ❤️</p></div>
-
+<div id="mainSite" class="website-container">
+    <div class="card-romance">
+        <div class="title-heart">
+            <i class="fas fa-heart"></i> صفاء يا أحلى نور <i class="fas fa-heart"></i>
+        </div>
+        <div class="sub">
+            كلام من قلبي لقلبك الطيب 🤍
+        </div>
+        
+        <div class="message-box">
+            <p>
+                🌸 يا صفاء، متزعليش .. أنا جنبك دايماً 🌸<br>
+                قلبك الطيب هو أجمل حاجة في الكون، وكل زعل هيروح لما تبتسمي.<br>
+                أنتي جميلة بجد من جوا وبرا، وضحكتك بتفرح العالم كله.<br>
+                هو مجرد يوم و يعدي، وكل حاجة هتبقى تمام، أنا هنا عشان أفرحك و أضحكك لأنك تستحقي كل الفرحة 💖
+            </p>
+        </div>
+        
+        <div class="countdown-area">
+            <div class="countdown-title">
+                🎂 عيد ميلادك يا صفاء 🎂
+                <i class="fas fa-birthday-cake"></i>
+            </div>
+            <div class="timer" id="countdownTimer">
+                <div class="time-block"><div class="time-number" id="days">00</div><div class="time-label">يوم</div></div>
+                <div class="time-block"><div class="time-number" id="hours">00</div><div class="time-label">ساعة</div></div>
+                <div class="time-block"><div class="time-number" id="minutes">00</div><div class="time-label">دقيقة</div></div>
+                <div class="time-block"><div class="time-number" id="seconds">00</div><div class="time-label">ثانية</div></div>
+            </div>
+            <p style="margin-top: 16px; color:#c45474;">❤️ باقي كدة و نعمل أجمل احتفالة مع بعض ❤️</p>
+        </div>
+        
+        <div class="book-section">
+            <div class="book-title">
+                <i class="fas fa-book-open"></i> كتاب صفات صفاء الجميلة <i class="fas fa-star"></i>
+            </div>
+            <div class="flipbook-container">
+                <div class="page-slider" id="bookSlider"></div>
+            </div>
+            <div class="book-nav">
+                <button class="book-btn" id="bookPrev"><i class="fas fa-chevron-right"></i> السابق</button>
+                <button class="book-btn" id="bookNext">التالي <i class="fas fa-chevron-left"></i></button>
+            </div>
         </div>
 
+        <!-- صندوق اللعبة (5 قلوب) -->
+        <div class="game-box" id="gameBox">
+            <div class="game-header">
+                <i class="fas fa-gift"></i> صندوق المفاجآت السحري <i class="fas fa-magic"></i>
+            </div>
+            <div id="gameLockArea" class="lock-area">
+                <p>🔐 الصندوق مقفول .. عايز كلمة سر مختلفة عن الأول 🔐</p>
+                <input type="text" id="gamePasswordInput" placeholder="اكتبي الكلمة السحرية" autocomplete="off">
+                <button id="unlockGameBtn"><i class="fas fa-key"></i> فتح الصندوق</button>
+                <div id="gameLockError" style="color:#c0395a; font-size:0.9rem;"></div>
+            </div>
+            <div id="gameContentArea" class="game-content">
+                <div style="font-size:1.3rem; margin-bottom:10px;"><i class="fas fa-heartbeat"></i> اختاري قلب و شوفي الرسالة المخفية <i class="fas fa-heartbeat"></i></div>
+                <div class="hearts-game" id="heartsContainer"></div>
+                <div id="gameMessage" class="message-reveal" style="display: none;"></div>
+                <button id="resetGameBtn" class="close-game-btn"><i class="fas fa-undo-alt"></i> اختيار قلب تاني</button>
+            </div>
+        </div>
+        
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/u7MxCuYPQT4?si=WObcA8dPXPISuRm1" title="أغنيتك المفضلة يا صفاء" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        
+        <!-- تم تعديل النص حسب الطلب -->
+        <div class="happy-message">
+            <i class="fas fa-smile-wink"></i> ابتسمي مافي شي يستهل انتي الورده <i class="fas fa-smile-wink"></i>
+        </div>
+        
+        <footer>
+            <i class="fas fa-heart"></i> دايماً معاكي .. عشان ابتسامتك تستاهل الدنيا <i class="fas fa-heart"></i>
+        </footer>
     </div>
-
-    <div class="footer">
-        Made With Love For Julia ❤️
-    </div>
-
 </div>
 
+<script>
+    // القفل الرئيسي
+    const overlay = document.getElementById('passwordOverlay');
+    const mainSite = document.getElementById('mainSite');
+    const unlockBtn = document.getElementById('unlockBtn');
+    const passInput = document.getElementById('passInput');
+    const errorMsg = document.getElementById('loginError');
+    
+    function createFloatingHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        heart.innerHTML = ['❤️', '💖', '💗', '🌸', '🌹', '✨', '🌼'][Math.floor(Math.random() * 7)];
+        heart.style.left = Math.random() * window.innerWidth + 'px';
+        heart.style.fontSize = (Math.random() * 24 + 16) + 'px';
+        heart.style.animationDuration = Math.random() * 5 + 5 + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+    }
+    
+    let heartInterval;
+    function startHearts() {
+        if(heartInterval) clearInterval(heartInterval);
+        heartInterval = setInterval(() => createFloatingHeart(), 2000);
+    }
+    
+    function popConfetti() {
+        canvasConfetti({ particleCount: 120, spread: 70, origin: { y: 0.6 }, colors: ['#e8436e', '#ffb3c6', '#ff6b8b'] });
+        canvasConfetti({ particleCount: 60, spread: 100, origin: { y: 0.7, x: 0.2 }, startVelocity: 15 });
+    }
+    
+    // العد التنازلي
+    function getNextBirthday() {
+        const now = new Date();
+        let birthday = new Date(now.getFullYear(), 7, 23);
+        if (now > birthday) birthday = new Date(now.getFullYear() + 1, 7, 23);
+        return birthday;
+    }
+    
+    function updateCountdown() {
+        const target = getNextBirthday();
+        const now = new Date();
+        const diff = target - now;
+        if (diff <= 0) {
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            return;
+        }
+        const days = Math.floor(diff / (1000*60*60*24));
+        const hours = Math.floor((diff % 86400000)/3600000);
+        const minutes = Math.floor((diff % 3600000)/60000);
+        const seconds = Math.floor((diff % 60000)/1000);
+        document.getElementById('days').innerText = days < 10 ? '0'+days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0'+hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0'+minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0'+seconds : seconds;
+    }
+    
+    // 30 صفحة (نفس المحتوى)
+    const pagesMessages = [
+        "صفاء.. طيبة القلب اللي بتحسس كل اللي حواليها بالأمان.", "حنونة زي ما الأمهات بتحن، و كمان زيادة.", "رقتك تخلي الزهور تغار.", "صبورة و قوية، حتى لو الدنيا ضايقة.", "نقاء روحك باين من عينيك.", "ذكائك و حكمتك في أصعب المواقف.", "صفاء تعرف تسمع كويس و ده بيخلي الهموم تروح.", "ستيلك الجميل و أخلاقك العالية.", "عندك قدرة إنك تفرحي غيرك بضحكة.", "صفاء الحنونة، لما بتلمس إيدها على قلب حد.", "قلبك أبيض زي السكر، و كرمك و عطائك بدون حدود.", "حتى في صمتك بتحسي باللي حواليكي.", "شخصية قيادية بهدوء.", "جمال جوهرك هو سر جمالك الحقيقي.", "لما تكوني موجودة، كل حاجة بتبقى أحلى.", "طاقة إيجابية بتفوق الوصف.", "لطافتك اللي بتخليني أرضى بالدنيا كلها.", "حنينها للناس مش طبيعي.", "قوتك الناعمة تخلي أي شخص جنبك يحس بالأمان.", "حتى الفراشات بتعشق رقة تعاملك.", "جاذبية روحانية، قلبها مليان طمأنينة.", "إخلاصها نادر وفيّة.", "صباحك بيصحى في النفس شغف الحياة.", "مشاعرك الجياشة تطمئن القلوب.", "بتحسن تاخد بالها من تفاصيل صغيرة.", "حنية صفاء بتوصل لحد النجوم.", "رقيك في التعامل و تواضعك.", "صفاء صافية زي مية نبع.", "عطاؤها و سخائها بدون مقابل.", "صفاء.. أنتِ جميلة من جوا و برا دا دايمًا واضح."
+    ];
+    let currentPageIndex = 0;
+    const totalPages = 30;
+    const sliderContainer = document.getElementById('bookSlider');
+    const prevBookBtn = document.getElementById('bookPrev');
+    const nextBookBtn = document.getElementById('bookNext');
+    
+    function buildBook() {
+        sliderContainer.innerHTML = '';
+        for (let i = 0; i < totalPages; i++) {
+            const pageDiv = document.createElement('div');
+            pageDiv.classList.add('page-card');
+            pageDiv.style.transform = `translateX(${i * 100}%)`;
+            pageDiv.innerHTML = `<div class="page-content"><i class="fas fa-feather-alt"></i> <div style="margin:10px 0;">📘 الصفحة ${i+1}</div><p>✨ ${pagesMessages[i]} ✨</p><i class="fas fa-heart"></i></div><div class="page-number">صفحة ${i+1} من ${totalPages}</div>`;
+            sliderContainer.appendChild(pageDiv);
+        }
+        updateBookTransform();
+    }
+    function updateBookTransform() {
+        document.querySelectorAll('.page-card').forEach((el, idx) => { el.style.transform = `translateX(${(idx - currentPageIndex) * 100}%)`; });
+    }
+    function goToBookPage(index) { currentPageIndex = Math.min(Math.max(index,0), totalPages-1); updateBookTransform(); createFloatingHeart(); }
+    function nextBookPage() { goToBookPage(currentPageIndex+1); }
+    function prevBookPage() { goToBookPage(currentPageIndex-1); }
+    
+    // *********************************************
+    // لعبة الصندوق: 5 قلوب مع رسائل جديدة
+    // كلمة المرور: مجبش سرتي (نفس السابق)
+    const GAME_PASSWORD = "مجبش سرتي";
+    const heartMessages = [
+        "✨ صفاء، طيبتك بتصنع المعجزات. وجودك لوحده كفيل إنه يفرح أي زعلان. انتي نادرة ✨",
+        "🌸 أنتِ نادرة مثل الياقوت، حنيتك بتلمس القلوب، وابتسامتك نور الدنيا. 🌸",
+        "💖 صفاء، ديماً بتعطي أمل، وروحك الجميلة بتخلي الناس حواليكي مبسوطة. افتكري إنك مميزة و حنونة 💖",
+        "🌺 دايماً سندك ومعاكي .. في كل لحظة وفي كل مكان. أنتي مش لوحدك أبداً 🌺",      // القلب الرابع
+        "🌟 أجمل حد أنا عرفته وطيبه .. صفاء، أنتي فعلاً أجمل قلب و أطيب روح 🌟"       // القلب الخامس
+    ];
+    
+    let gameUnlocked = false;
+    const gameLockDiv = document.getElementById('gameLockArea');
+    const gameContentDiv = document.getElementById('gameContentArea');
+    const gamePasswordInput = document.getElementById('gamePasswordInput');
+    const unlockGameBtn = document.getElementById('unlockGameBtn');
+    const gameLockErrorSpan = document.getElementById('gameLockError');
+    const heartsContainer = document.getElementById('heartsContainer');
+    const gameMessageDiv = document.getElementById('gameMessage');
+    const resetGameBtn = document.getElementById('resetGameBtn');
+    
+    function buildGameHearts() {
+        heartsContainer.innerHTML = '';
+        for(let i=0; i<5; i++) {
+            const heartDiv = document.createElement('div');
+            heartDiv.classList.add('choice-heart');
+            heartDiv.setAttribute('data-index', i);
+            heartDiv.innerHTML = `<i class="fas fa-heart"></i><p>قلب ${i+1}</p>`;
+            heartDiv.addEventListener('click', () => {
+                if(gameUnlocked) {
+                    gameMessageDiv.style.display = 'block';
+                    gameMessageDiv.innerHTML = `<i class="fas fa-comment-dots"></i> ${heartMessages[i]} <i class="fas fa-smile"></i>`;
+                    createFloatingHeart();
+                    canvasConfetti({ particleCount: 40, spread: 45, origin: { y: 0.8 } });
+                } else {
+                    gameLockErrorSpan.innerText = "الصندوق لسة مقفول! افتحيه الأول";
+                }
+            });
+            heartsContainer.appendChild(heartDiv);
+        }
+    }
+    
+    function unlockGameBox() {
+        const val = gamePasswordInput.value.trim();
+        if(val === GAME_PASSWORD) {
+            gameLockDiv.style.display = 'none';
+            gameContentDiv.style.display = 'block';
+            gameUnlocked = true;
+            gameLockErrorSpan.innerText = '';
+            buildGameHearts();
+            gameMessageDiv.style.display = 'none';
+            createFloatingHeart();
+            popConfetti();
+            const box = document.querySelector('.game-box');
+            box.style.animation = 'none';
+            setTimeout(() => box.style.animation = 'gentlePulse 2s infinite', 10);
+        } else {
+            gameLockErrorSpan.innerText = "🔐 كلمة المرور مش صحيحة .. الكلمة السحرية هي: (مجبش سرتي)";
+            gamePasswordInput.value = '';
+            gamePasswordInput.focus();
+            const lockDiv = document.querySelector('.lock-area');
+            lockDiv.style.transform = 'translateX(5px)';
+            setTimeout(() => lockDiv.style.transform = '', 100);
+        }
+    }
+    
+    function resetGame() {
+        if(gameUnlocked) {
+            gameMessageDiv.style.display = 'none';
+            gameMessageDiv.innerHTML = '';
+            createFloatingHeart();
+        }
+    }
+    
+    unlockGameBtn.addEventListener('click', unlockGameBox);
+    resetGameBtn.addEventListener('click', resetGame);
+    gamePasswordInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') unlockGameBox(); });
+    
+    // فتح الموقع الرئيسي
+    function unlockWebsite() {
+        const entered = passInput.value.trim();
+        if (entered === "صفاء") {
+            overlay.style.display = 'none';
+            mainSite.style.display = 'flex';
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+            startHearts();
+            buildBook();
+            goToBookPage(0);
+            // تجهيز اللعبة
+            gameLockDiv.style.display = 'flex';
+            gameContentDiv.style.display = 'none';
+            gameUnlocked = false;
+            gamePasswordInput.value = '';
+            gameLockErrorSpan.innerText = '';
+            for(let i=0;i<15;i++) setTimeout(()=>createFloatingHeart(), i*120);
+        } else {
+            errorMsg.innerText = "كلمة السر هي اسمك الحلو: صفاء 😊";
+            passInput.value = '';
+            passInput.focus();
+        }
+    }
+    unlockBtn.addEventListener('click', unlockWebsite);
+    passInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') unlockWebsite(); });
+    prevBookBtn.addEventListener('click', prevBookPage);
+    nextBookBtn.addEventListener('click', nextBookPage);
+    window.addEventListener('keydown', (e) => {
+        if(mainSite.style.display === 'flex') {
+            if(e.key === 'ArrowRight') prevBookPage();
+            if(e.key === 'ArrowLeft') nextBookPage();
+        }
+    });
+    
+    let preHeartInterval = setInterval(() => {
+        if(overlay.style.display !== 'none') {
+            const soft = document.createElement('div');
+            soft.classList.add('floating-heart');
+            soft.innerHTML = '🌸';
+            soft.style.fontSize = '13px';
+            soft.style.opacity = '0.5';
+            document.body.appendChild(soft);
+            setTimeout(()=> soft.remove(), 5000);
+        } else clearInterval(preHeartInterval);
+    }, 4000);
+    
+    window.onload = () => { passInput.focus(); };
+</script>
 </body>
-        </html>
+    </html>
